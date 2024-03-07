@@ -4,20 +4,27 @@ typedef enum {
     TextSect,
     StartFunc,
     Move,
-    RAX,
-    RDI,
+    Register,
     SysCall,
+    Comma,
+    Number,
+} TokenType;
+
+typedef struct Token {
+    TokenType type;
+    int is_alloc;
+    char *value;
 } Token;
 
-typedef struct tokenList tokenList;
-struct tokenList {
+typedef struct TokenList TokenList;
+struct TokenList {
     size_t count;
     size_t len;
-    void (*init)(tokenList*);
-    void (*append)(tokenList*, Token t);
+    void (*init)(TokenList*);
+    void (*append)(TokenList*, Token t);
     Token *arr;
 };
 
-void tokenise(char *str);
-void initTokenList(tokenList *self);
-void appendToken(tokenList *self, Token t);
+TokenList tokenise(char *str);
+void initTokenList(TokenList *self);
+void appendToken(TokenList *self, Token t);

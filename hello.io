@@ -1,3 +1,5 @@
 .text
     _main():
-        rax, rdi
+        mov rax, 60
+        mov rdi, 0
+        syscall
